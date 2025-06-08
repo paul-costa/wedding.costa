@@ -14,7 +14,7 @@
 }
 
 @mixin header-text {
-  color: $darkest-gray;
+  color: $darker-gray;
   font-family: $default-header-font;
   font-size: $xl-font-size;
   line-height: $xl-font-size;
@@ -37,7 +37,7 @@
 }
 
 @mixin sub-header-text {
-  color: $darkest-gray;
+  color: $darker-gray;
   font-family: $default-header-font;
   font-size: $md-font-size;
   line-height: $md-font-size;
@@ -56,7 +56,7 @@
 }
 
 @mixin nav-text {
-  color: $darkest-gray;
+  color: $darker-gray;
   font-family: $default-header-font;
   font-size: $md-font-size;
   line-height: $md-font-size;
@@ -75,7 +75,7 @@
 @mixin body-text {
   font-size: $md-font-size;
   line-height: $md-font-size;
-  color: $medium-gray;
+  color: $gray;
   font-family: $default-body-font;
 
   @media only screen and (max-width: $md-breakpoint) {

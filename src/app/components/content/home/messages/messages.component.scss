@@ -21,9 +21,9 @@
       gap: 6px;
       justify-content: space-between;
       font-size: $md-font-size;
-      border-radius: $s-border-radius;
-      background-color: $darker-gray;
-      color: $lightest-gray;
+      border-radius: 6px;
+      background-color: $dark-gray;
+      color: $lighter-gray;
       padding: 4px 12px;
 
       .meta-data {
@@ -35,7 +35,7 @@
       }
 
       &.admin {
-        background-color: $mat-theme-tertiary-burgundy;
+        background-color: $mat-theme-primary-green;
       }
     }
 
@@ -54,7 +54,7 @@
 
     .send-button {
       margin-top: 4px;
-      color: $mat-theme-tertiary-burgundy;
+      color: $mat-theme-primary-green;
     }
   }
 }

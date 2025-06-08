@@ -9,22 +9,16 @@ $default-body-font: 'Roboto Flex', sans-serif;
 
 $white: rgb(255, 255, 255);
 $off-white: rgb(245, 240, 225);
-$lightest-gray: rgb(220, 220, 220);
-$lighter-gray: rgb(210, 210, 210);
+$lighter-gray: rgb(220, 220, 220);
 $light-gray: rgb(200, 200, 200);
-$medium-lighter-gray: rgb(160, 160, 160);
-$medium-light-gray: rgb(140, 140, 140);
-$gray: rgb(120, 120, 120);
-$medium-gray: rgb(90, 90, 90);
-$dark-gray: rgb(70, 70, 70);
-$darker-gray: rgb(50, 50, 50);
-$darkest-gray: rgb(30, 30, 30);
+$gray: rgb(70, 70, 70);
+$dark-gray: rgb(50, 50, 50);
+$darker-gray: rgb(30, 30, 30);
 $black: rgb(0, 0, 0);
 
 $mat-theme-primary-green: #1f3521;
 $mat-theme-background-green: #0c120c;
-$mat-theme-tertiary-burgundy: #450507;
-$mat-theme-error-red: #90003d;
+$mat-theme-error-red: #ba1a1a;
 $mat-theme-neutral-smoke-blue: #2e5867;
 $mat-theme-neutralVariant-turquoise: #0085a2;
 
@@ -33,7 +27,4 @@ $lg-breakpoint: 1440px;
 $md-breakpoint: 960px;
 $sm-breakpoint: 600px;
 
-$xl-border-radius: 36px;
-$l-border-radius: 24px;
-$m-border-radius: 12px;
-$s-border-radius: 6px;
+$default-border-radius: 12px;

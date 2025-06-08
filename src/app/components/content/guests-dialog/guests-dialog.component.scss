@@ -16,13 +16,13 @@
       line-height: $xl-font-size;
       letter-spacing: 3px;
       font-weight: 300;
-      color: $darkest-gray;
+      color: $darker-gray;
       text-align: center;
     }
 
     .sub-header {
       font-size: $md-font-size;
-      color: $dark-gray;
+      color: $gray;
       font-weight: 300;
     }
   }
@@ -36,7 +36,7 @@
       width: 100%;
 
       ::ng-deep .mat-mdc-select-value-text {
-        color: $darkest-gray !important;
+        color: $darker-gray !important;
       }
     }
   }
@@ -49,7 +49,7 @@
     .disclaimer,
     .disabled-guest-hint {
       font-size: $md-font-size;
-      color: $dark-gray;
+      color: $gray;
       font-weight: 300;
     }
 
@@ -70,10 +70,10 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      background: $dark-gray;
+      background: $gray;
       color: $off-white;
       padding: 6px 12px;
-      border-radius: $m-border-radius;
+      border-radius: $default-border-radius;
 
       &.disabled {
         opacity: 0.25;

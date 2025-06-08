@@ -35,7 +35,7 @@
 
         width: 100%;
         cursor: pointer;
-        border-radius: $m-border-radius;
+        border-radius: $default-border-radius;
         grid-column: 1 / span 1;
         object-fit: cover;
 
@@ -73,7 +73,7 @@
         @include mixin.brighten-on-hover(0.025);
 
         aspect-ratio: 3 / 1;
-        border-radius: $m-border-radius;
+        border-radius: $default-border-radius;
         object-fit: cover;
         cursor: pointer;
         width: 100%;

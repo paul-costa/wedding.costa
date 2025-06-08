@@ -5,7 +5,7 @@
 .navbar {
   display: flex;
   padding: 12px 6px;
-  background-color: $dark-gray;
+  background-color: $gray;
   flex-direction: column;
   letter-spacing: 3px;
   height: calc(100% - 24px);
@@ -65,14 +65,15 @@
     }
 
     &.account {
-      @include mat.elevation(6, rgba($mat-theme-tertiary-burgundy, 0.8));
+      @include mat.elevation(6, $mat-theme-primary-green);
       @include mixin.brighten-on-hover(0.01);
 
       margin-top: auto;
-      background: rgba($mat-theme-tertiary-burgundy, 0.8);
+      background: $mat-theme-primary-green;
+      text-transform: none;
 
       &:hover {
-        @include mat.elevation(12, rgba($mat-theme-tertiary-burgundy, 1));
+        @include mat.elevation(12, $mat-theme-primary-green);
         @include mixin.brighten-on-hover(0.01);
       }
     }

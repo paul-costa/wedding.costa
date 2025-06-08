@@ -1,7 +1,7 @@
 @use './styles/config.scss' as *;
 @use './styles/_mixins.scss' as mixin;
-@use '@angular/material' as mat;
 @use './styles/_theme-colors.scss' as theme;
+@use '@angular/material' as mat;
 
 :root {
   color-scheme: dark;
@@ -10,6 +10,7 @@
   * ---  ---  --- reassign css variables ---  ---  ---
   */
   --mat-sys-background: #{$mat-theme-background-green};
+  --mat-form-field-error-text-color: #{$mat-theme-error-red};
 }
 
 html {
@@ -130,16 +131,16 @@ body {
 .mdc-text-field--filled {
   background-color: $light-gray !important;
   .mdc-floating-label {
-    color: $darkest-gray !important;
+    color: $darker-gray !important;
   }
 }
 
 .mat-mdc-input-element {
-  color: $darkest-gray !important;
+  color: $darker-gray !important;
 }
 
 .mdc-label {
-  color: $darker-gray;
+  color: $dark-gray;
   font-size: $md-font-size;
   text-align: left;
   cursor: pointer;
@@ -159,7 +160,7 @@ mat-tab-group {
   }
 
   .mdc-tab__text-label {
-    color: $darkest-gray !important;
+    color: $darker-gray !important;
   }
 }
 
@@ -189,12 +190,12 @@ mat-icon {
   filter: brightness(0.95);
   background-color: rgba($mat-theme-neutralVariant-turquoise, 0.2);
   padding: 24px;
-  border-radius: $m-border-radius;
+  border-radius: $default-border-radius;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  color: $darker-gray;
+  color: $dark-gray;
   height: fit-content;
   max-width: calc(100% - 24px);
   min-width: 420px;

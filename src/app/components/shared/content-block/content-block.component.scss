@@ -11,7 +11,7 @@
   @include mat.elevation(4, $off-white);
   @include mixin.l-transition;
 
-  border-radius: $m-border-radius;
+  border-radius: $default-border-radius;
   background-color: $off-white;
   display: flex;
   flex-direction: column;
