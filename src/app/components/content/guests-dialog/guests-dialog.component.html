@@ -1,7 +1,7 @@
 <div *ngIf="content" class="container">
   <div class="header-container">
-    <span class="header"> {{ content.header }} </span>
-    <span class="sub-header"> {{ content.subHeader }} </span>
+    <span class="header" [innerHTML]="content.header"> </span>
+    <span class="sub-header" [innerHTML]="content.subHeader"> </span>
   </div>
 
   <div class="guests-select-container">
@@ -16,8 +16,8 @@
   </div>
 
   <div class="disclaimer-container">
-    <span class="disclaimer"> {{ content.disclaimer }}</span>
-    <span class="disabled-guest-hint"> {{ content.disabledGuestHint }}</span>
+    <span class="disclaimer" [innerHTML]="content.disclaimer"></span>
+    <span class="disabled-guest-hint" [innerHTML]="content.disabledGuestHint"> </span>
   </div>
 
   <div class="actions-container">
