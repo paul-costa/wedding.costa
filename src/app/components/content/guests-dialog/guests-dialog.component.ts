@@ -7,11 +7,12 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AccountDialog, Guest } from 'src/app/constants/firebase/fire-store.types';
 import { LocalStorageKeys } from 'src/app/constants/general.constants';
 import { AccountDialogConfig, GuestsDialogCloseConfig } from 'src/app/constants/general.interfaces';
 
-const materialModules = [MatSelectModule, MatFormFieldModule, MatCheckboxModule, MatRadioModule, MatButtonModule];
+const materialModules = [MatSelectModule, MatFormFieldModule, MatCheckboxModule, MatRadioModule, MatButtonModule, MatTooltipModule];
 
 @Component({
   selector: 'app-guests-dialog',
@@ -30,7 +31,7 @@ export class GuestsDialogComponent {
   private readonly dialogRef: MatDialogRef<GuestsDialogComponent> = inject(MatDialogRef);
 
   constructor() {
-    this.guests = this.config.guests;
+    this.guests = this.config.guests.sort((g1, g2) => (g1.lastName?.toLocaleLowerCase() > g2.lastName?.toLocaleLowerCase() ? 1 : -1));
     this.content = this.config.accountDialog;
 
     const submittedGuestId = localStorage.getItem(LocalStorageKeys.SubmittedGuestId);

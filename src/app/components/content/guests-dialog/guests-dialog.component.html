@@ -9,7 +9,7 @@
       <mat-label>{{ content.guestSelectLabel }} </mat-label>
       <mat-select [(value)]="selectedGuestId" (selectionChange)="onSelectedGuestChange($event.value)">
         <mat-option *ngFor="let guest of guests" [value]="guest.id">
-          <span> {{ guest.firstName }} {{ guest.lastName }} </span>
+          <span> {{ guest.lastName }} {{ guest.firstName }} </span>
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -17,7 +17,6 @@
 
   <div class="disclaimer-container">
     <span class="disclaimer" [innerHTML]="content.disclaimer"></span>
-    <span class="disabled-guest-hint" [innerHTML]="content.disabledGuestHint"> </span>
   </div>
 
   <div class="actions-container">
@@ -26,6 +25,7 @@
       [ngClass]="{ disabled: !selectedGuestId }"
       color="primary"
       [disabled]="!selectedGuestId"
+      [matTooltip]="!selectedGuestId ? content.disabledGuestTooltip : null"
       [(ngModel)]="isGuestShowingUp"
     >
       <mat-radio-button [value]="true">{{ content.isShowingUpLabel }}</mat-radio-button>

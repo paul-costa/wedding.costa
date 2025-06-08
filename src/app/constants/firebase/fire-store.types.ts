@@ -5,7 +5,7 @@ export interface AccountDialog {
   subHeader?: string;
   guestSelectLabel?: string;
   disclaimer?: string;
-  disabledGuestHint?: string;
+  disabledGuestTooltip?: string;
   isShowingUpLabel?: string;
   isNotShowingUpLabel?: string;
   actionCancelLabel?: string;
