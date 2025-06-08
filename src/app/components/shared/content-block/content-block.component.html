@@ -1,18 +1,11 @@
 <div class="content-block" [ngClass]="{ grid: contentPosition === 'grid', tab: contentPosition === 'tab' }">
   @if (headerText; as h) {
-    <div class="header">{{ h }}</div>
+    <div class="header" [innerHTML]="h"></div>
   }
 
   <div class="body">
     @for (t of bodyTexts; track $index) {
-      <span
-        [ngClass]="{
-          bold: bodyTextsStylePerIndex?.[$index] === 'bold',
-          italic: bodyTextsStylePerIndex?.[$index] === 'italic',
-          underline: bodyTextsStylePerIndex?.[$index] === 'underline',
-        }"
-        [innerHTML]="t"
-      ></span>
+      <span [innerHTML]="t"></span>
     }
 
     @for (c of additionalInfoCards; track $index) {

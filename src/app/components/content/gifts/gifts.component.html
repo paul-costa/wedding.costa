@@ -4,7 +4,7 @@
   <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
 } @else if (currentLoadingState === LoadingState.Success && data) {
   <div class="main-container">
-    <app-content-block [headerText]="data.summary?.header" [bodyTexts]="data.summary?.content" [bodyTextsStylePerIndex]="{ '0': 'italic' }">
+    <app-content-block [headerText]="data.summary?.header" [bodyTexts]="data.summary?.content">
       <div class="image-container">
         <img [src]="GiftsImagesSrc.giftBox" />
       </div>

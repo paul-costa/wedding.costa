@@ -4,12 +4,7 @@
   <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
 } @else if (currentLoadingState === LoadingState.Success && data) {
   <div class="main-container">
-    <app-content-block
-      [headerText]="data.summaryHeaderText"
-      [bodyTexts]="data.summaryBodyTexts"
-      [hyperLinks]="data.summaryHyperLinks"
-      [bodyTextsStylePerIndex]="{ '0': 'italic' }"
-    />
+    <app-content-block [headerText]="data.summaryHeaderText" [bodyTexts]="data.summaryBodyTexts" [hyperLinks]="data.summaryHyperLinks" />
 
     <div class="dresscode-content">
       <app-content-block class="women-container" [headerText]="data.womenHeaderText" [bodyTexts]="data.womenBodyTexts">
@@ -27,7 +22,7 @@
   <div class="dos-donts-container">
     @for (item of items; track item; let index = $index) {
       <div class="item-container">
-        <div class="item-header">{{ item.header }}</div>
+        <div class="item-header" [innerHTML]="item.header"></div>
         <div class="item-content">
           <ul class="list">
             @for (c of item.content; track $index) {
