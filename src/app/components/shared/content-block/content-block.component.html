@@ -11,9 +11,8 @@
           italic: bodyTextsStylePerIndex?.[$index] === 'italic',
           underline: bodyTextsStylePerIndex?.[$index] === 'underline',
         }"
-      >
-        {{ t }}</span
-      >
+        [innerHTML]="t"
+      ></span>
     }
 
     @for (c of additionalInfoCards; track $index) {
