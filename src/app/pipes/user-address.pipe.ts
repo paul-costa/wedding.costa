@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Address } from '../constants/firebase/fire-store.types';
+import { CountryCodeNameMap } from '../constants/general.constants';
 
 export type AdditionalInfoType = Address;
 
@@ -9,7 +10,7 @@ export type AdditionalInfoType = Address;
 export class UserAddressPipe implements PipeTransform {
   transform(value: AdditionalInfoType): string {
     if (instanceOfAddress(value)) {
-      return `${value.title}\n${value.streetName} ${value.streetNumber}\n${value.zip} ${value.city} ${value.countryCode}`;
+      return `${value.title}\n${value.streetName} ${value.streetNumber}\n${value.zip} ${value.city}\n${CountryCodeNameMap[value.countryCode]}`;
     }
   }
 }

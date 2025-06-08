@@ -56,6 +56,7 @@ export interface Contact {
   lastName?: string;
   email?: string;
   phone?: string;
+  address?: Address;
 }
 
 export interface Dresscode {

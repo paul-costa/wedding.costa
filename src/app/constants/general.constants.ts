@@ -24,3 +24,5 @@ export enum Content {
 
 export const DefaultOverlayBrightness = 0.25;
 export const DefaultSnackbarConfig: MatSnackBarConfig = { duration: 2000, panelClass: 'default-snackbar' };
+
+export const CountryCodeNameMap: Record<string, string> = { ['AT']: 'Österreich', ['DE']: 'Deutschland' };

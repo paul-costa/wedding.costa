@@ -47,7 +47,7 @@
       @include mat.elevation(16);
     }
 
-    .contact-header {
+    .header {
       display: flex;
       gap: 24px;
       align-items: center;
@@ -68,7 +68,15 @@
       }
     }
 
-    .contact-actions-container {
+    .content {
+      @include mixin.body-text;
+
+      letter-spacing: 2px;
+      white-space: break-spaces;
+      font-weight: 200;
+    }
+
+    .actions-container {
       display: flex;
       flex-direction: column;
       align-items: start;
@@ -97,7 +105,7 @@
     gap: 24px;
   }
 
-  .contact-container .contact .contact-header .image {
+  .contact-container .contact .header .image {
     width: 80px;
   }
 
@@ -111,7 +119,7 @@
     display: flex;
     flex-direction: column;
 
-    .contact .contact-header .name {
+    .contact .header .name {
       font-size: $sm-font-size;
       letter-spacing: 1.5px;
     }
@@ -122,7 +130,7 @@
   .contact-container .contact {
     gap: 12px;
 
-    .contact-header {
+    .header {
       flex-direction: column;
       gap: 6px;
     }
