@@ -10,7 +10,7 @@ import { ContentComponent } from './general.interfaces';
 
 export const ContentComponents: Record<Content, ContentComponent> = {
   [Content.Home]: {
-    title: 'Homepage',
+    title: 'Übersicht',
     icon: 'home',
     url: 'home',
     component: HomeComponent,
