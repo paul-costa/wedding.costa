@@ -51,7 +51,7 @@
           <div class="body">
             <div class="texts">
               @for (t of journey.carTabParkingBodyTexts; track $index) {
-                <span> {{ t }}</span>
+                <span [innerHTML]="t"></span>
               }
             </div>
             <div class="images-container is-hovered">
@@ -83,7 +83,7 @@
         <mat-tab [label]="journey.publicTabLabel">
           <div class="body two-sides">
             <div class="route">
-              <div class="sub-header">{{ journey.publicTabSteps[0][0] }}</div>
+              <div class="sub-header" [innerHTML]="journey.publicTabSteps[0][0]"></div>
               <div class="steps">
                 @for (step of journey.publicTabSteps[0]; track $index; let first = $first) {
                   @if (!first) {
@@ -93,7 +93,7 @@
               </div>
             </div>
             <div class="route">
-              <div class="sub-header">{{ journey.publicTabSteps[1][0] }}</div>
+              <div class="sub-header" [innerHTML]="journey.publicTabSteps[1][0]"></div>
               <div class="steps">
                 @for (step of journey.publicTabSteps[1]; track $index; let first = $first) {
                   @if (!first) {
