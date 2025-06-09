@@ -1,4 +1,4 @@
-@import 'src/styles/config.scss';
+@use 'src/styles/config.scss' as *;
 
 .main-container.split {
   flex-direction: row;

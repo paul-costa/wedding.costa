@@ -1,1 +1,20 @@
-@import 'src/styles/config.scss';
+@use 'src/styles/config.scss' as *;
+@use 'src/styles/_mixins.scss' as mixin;
+@use 'src/styles/_theme-colors.scss' as theme;
+@use '@angular/material' as mat;
+
+.main-container {
+  &.split {
+    gap: 48px;
+  }
+}
+
+.timeline-stepper {
+  @include mat.elevation(4);
+
+  border-radius: 24px;
+
+  &:hover {
+    @include mat.elevation(16);
+  }
+}

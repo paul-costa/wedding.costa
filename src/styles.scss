@@ -7,10 +7,14 @@
   color-scheme: dark;
 
   /*
-  * ---  ---  --- reassign css variables ---  ---  ---
+  * ---reassign css variables---
   */
   --mat-sys-background: #{$mat-theme-background-green};
   --mat-form-field-error-text-color: #{$mat-theme-error-red};
+  --mat-stepper-container-color: #{$lighter-gray};
+  --mat-stepper-header-edit-state-icon-background-color: #{rgba($mat-theme-neutralVariant-turquoise, 0.6)};
+  --mat-stepper-header-selected-state-icon-background-color: #{rgba($mat-theme-neutralVariant-turquoise, 1)};
+  --mat-stepper-header-icon-background-color: #{rgba($mat-theme-neutralVariant-turquoise, 0.6)};
 }
 
 html {
@@ -176,6 +180,33 @@ mat-tab-group {
 
 mat-icon {
   min-width: 18px;
+}
+
+mat-stepper {
+  .mat-vertical-content {
+    @include mixin.body-text;
+
+    display: flex;
+    gap: 16px;
+  }
+
+  .mat-step-text-label {
+    @include mixin.body-text;
+
+    font-size: $md-font-size;
+    line-height: $md-font-size;
+    letter-spacing: 1.5px;
+    font-weight: 200;
+    font-weight: bold;
+  }
+
+  .mat-step-icon {
+    background-color: $mat-theme-primary-green !important;
+
+    .mat-step-icon-content {
+      display: none !important;
+    }
+  }
 }
 
 /**

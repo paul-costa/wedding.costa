@@ -1,5 +1,5 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnDestroy } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +19,7 @@ const materialModules = [MatInputModule, MatButtonModule, MatIconModule, MatProg
   styleUrl: './messages.component.scss',
   imports: [NgClass, ReactiveFormsModule, DatePipe, ContentBlock, ...materialModules],
 })
-export class MessagesComponent {
+export class MessagesComponent implements OnDestroy {
   @Input()
   config: Messages;
 
@@ -30,10 +30,19 @@ export class MessagesComponent {
   readonly LoadingState = LoadingState;
   readonly MessageAdminFirstNames = MessageAdminFirstNames;
 
+  private readonly messageFetchInterval: ReturnType<typeof setInterval>;
   private readonly fireStoreService = inject(FireStoreService);
 
   constructor() {
     this.fetchAndSetUserMessages();
+
+    this.messageFetchInterval = setInterval(() => {
+      this.fetchAndSetUserMessages(true);
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.messageFetchInterval);
   }
 
   onSendUserMessageButtonClick() {
@@ -63,8 +72,10 @@ export class MessagesComponent {
     });
   }
 
-  private fetchAndSetUserMessages() {
-    this.currentLoadingState = LoadingState.Loading;
+  private fetchAndSetUserMessages(hideLoading = false) {
+    if (!hideLoading) {
+      this.currentLoadingState = LoadingState.Loading;
+    }
 
     this.fireStoreService
       .getUserMessages()
