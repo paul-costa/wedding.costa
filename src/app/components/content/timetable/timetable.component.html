@@ -5,26 +5,22 @@
 } @else if (currentLoadingState === LoadingState.Success && data) {
   <div class="main-container split">
     <app-content-block [headerText]="data.summary.header" [bodyTexts]="data.summary.content" />
-    <app-content-block [headerText]="data.basicInfos.header" [bodyTexts]="data.basicInfos.content" />
   </div>
 
   <div class="main-container split">
     @let time = data.timeline;
 
     <app-content-block [headerText]="time?.header">
-      <ng-container>
-        <mat-stepper class="timeline-stepper" orientation="vertical">
-          @for (t of timelineContent; track $index) {
-            <mat-step class="content-container">
-              <ng-template matStepLabel><span [innerHTML]="t.key"></span></ng-template>
-              <ng-template matStepContent><span [innerHTML]="t.value"></span></ng-template>
-            </mat-step>
-          }
-        </mat-stepper>
-      </ng-container>
+      <mat-stepper class="timeline-stepper" orientation="vertical">
+        @for (t of timelineContent; track $index) {
+          <mat-step class="content-container">
+            <ng-template matStepLabel><span [innerHTML]="t.key"></span></ng-template>
+            <ng-template matStepContent><span [innerHTML]="t.value"></span></ng-template>
+          </mat-step>
+        }
+      </mat-stepper>
     </app-content-block>
+
     <app-content-block [headerText]="data.more.header" [bodyTexts]="data.more.content" />
   </div>
 }
-
-<ng-template matStepperIcon="chat"> <mat-icon> forum </mat-icon></ng-template>

@@ -1,19 +1,19 @@
-import { AsyncPipe, KeyValue, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, KeyValue } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
-import { MatStepperIcon, MatStepperModule } from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { Observable, finalize, from, tap } from 'rxjs';
 import { Timetable } from 'src/app/constants/firebase/fire-store.types';
 import { LoadingState } from 'src/app/constants/general.constants';
 import { FireStoreService } from 'src/app/services/fire-store.service';
 import { ContentBlock } from '../../shared/content-block/content-block.component';
 
-const materialModules = [MatProgressBar, MatStepperModule, MatStepperIcon, MatIconModule];
+const materialModules = [MatProgressBar, MatStepperModule, MatIconModule];
 
 @Component({
   selector: 'app-timetable',
-  imports: [ContentBlock, AsyncPipe, NgTemplateOutlet, ...materialModules],
+  imports: [ContentBlock, AsyncPipe, ...materialModules],
   templateUrl: './timetable.component.html',
   styleUrl: './timetable.component.scss',
 })

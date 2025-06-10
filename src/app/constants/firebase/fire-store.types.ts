@@ -123,7 +123,6 @@ export interface DoesAndDonts {
 export interface Timetable {
   summary?: ContentBlockHeaderAndList;
   more?: ContentBlockHeaderAndList;
-  basicInfos?: ContentBlockHeaderAndList;
   timeline?: {
     header?: string;
     contentPerTime?: Record<string, string>;
