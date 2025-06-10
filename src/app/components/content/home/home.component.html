@@ -24,9 +24,11 @@
                 <span class="title">{{ c.firstName }}</span>
               </div>
 
-              <div class="content">
-                <span [innerHtml]="c.address | UserAddress"> </span>
-              </div>
+              @if (c.address) {
+                <div class="content">
+                  <span [innerHtml]="c.address | UserAddress"> </span>
+                </div>
+              }
 
               <div class="actions-container">
                 <a class="display-none" [href]="'mailto:' + c.email + '?subject=Costa%20Hochzeit:%20Website'" #emailLink></a>
