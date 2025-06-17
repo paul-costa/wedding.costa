@@ -3,12 +3,30 @@
 .main-container {
   &.split {
     flex-direction: row;
-    gap: 48px;
+    gap: $default-container-gap;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: $default-container-gap;
+  }
+}
+
+@media only screen and (max-width: $lg-breakpoint) {
+  .main-container {
+    &.split {
+      gap: $narrow-container-gap;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: $narrow-container-gap;
+    }
   }
 }
 
 @media only screen and (max-width: $md-breakpoint) {
-  .main-container.split {
-    flex-direction: column;
+  .main-container {
+    &.split {
+      flex-direction: column;
+    }
   }
 }

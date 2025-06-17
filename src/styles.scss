@@ -107,7 +107,7 @@ body {
 
 .main-container {
   display: flex;
-  gap: 36px;
+  gap: $default-container-gap;
   padding-right: calc(160px - 24px);
   margin-bottom: 48px;
 
@@ -118,7 +118,7 @@ body {
   @media only screen and (max-width: $lg-breakpoint) {
     flex-direction: column;
     padding: 0;
-    gap: 24px;
+    gap: $narrow-container-gap;
   }
 }
 

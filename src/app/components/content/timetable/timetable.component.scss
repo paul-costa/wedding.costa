@@ -5,16 +5,32 @@
 
 .main-container {
   &.split {
-    gap: 48px;
+    gap: $default-container-gap;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: $default-container-gap;
+  }
+
+  .timeline-stepper {
+    @include mat.elevation(4);
+
+    border-radius: 24px;
+
+    &:hover {
+      @include mat.elevation(16);
+    }
   }
 }
 
-.timeline-stepper {
-  @include mat.elevation(4);
+@media only screen and (max-width: $lg-breakpoint) {
+  .main-container {
+    &.split {
+      gap: $narrow-container-gap;
+    }
 
-  border-radius: 24px;
-
-  &:hover {
-    @include mat.elevation(16);
+    &:not(:last-child) {
+      margin-bottom: $narrow-container-gap;
+    }
   }
 }

@@ -1,10 +1,24 @@
 @use 'src/styles/config.scss' as *;
 
-.main-container.split {
-  flex-direction: row;
-  gap: 48px;
+.main-container {
+  &.split {
+    flex-direction: row;
+    gap: $default-container-gap;
+  }
+}
 
-  @media only screen and (max-width: $md-breakpoint) {
-    flex-direction: column;
+@media only screen and (max-width: $lg-breakpoint) {
+  .main-container {
+    &.split {
+      gap: $narrow-container-gap;
+    }
+  }
+}
+
+@media only screen and (max-width: $md-breakpoint) {
+  .main-container {
+    &.split {
+      flex-direction: column;
+    }
   }
 }
