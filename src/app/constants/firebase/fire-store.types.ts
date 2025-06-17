@@ -120,7 +120,7 @@ export interface DoesAndDonts {
   during?: ContentBlockHeaderAndList;
 }
 
-export interface Timetable {
+export interface Schedule {
   summary?: ContentBlockHeaderAndList;
   more?: ContentBlockHeaderAndList;
   timeline?: {

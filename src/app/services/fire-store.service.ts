@@ -14,7 +14,7 @@ import {
   HomepageCollection,
   LocationCollection,
   MessagesCollection,
-  TimetableCollection,
+  ScheduleCollection,
   UserMessagesCollection,
 } from '../constants/firebase/fire-store.constants';
 import {
@@ -25,7 +25,7 @@ import {
   Homepage,
   LocationJourney,
   Messages,
-  Timetable,
+  Schedule,
   UserMessage,
 } from '../constants/firebase/fire-store.types';
 import { AccountDialogConfig, GuestsDialogCloseConfig } from '../constants/general.interfaces';
@@ -114,8 +114,8 @@ export class FireStoreService {
     return snapshot.docs.map((d) => d.data())[0];
   }
 
-  async getTimetable(): Promise<Timetable> {
-    const col = collection(this.db, TimetableCollection);
+  async getSchedule(): Promise<Schedule> {
+    const col = collection(this.db, ScheduleCollection);
     const snapshot = await getDocs(col);
     return snapshot.docs.map((d) => d.data())[0];
   }

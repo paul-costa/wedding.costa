@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { Observable, finalize, from, tap } from 'rxjs';
-import { Timetable } from 'src/app/constants/firebase/fire-store.types';
+import { Schedule } from 'src/app/constants/firebase/fire-store.types';
 import { LoadingState } from 'src/app/constants/general.constants';
 import { FireStoreService } from 'src/app/services/fire-store.service';
 import { ContentBlock } from '../../shared/content-block/content-block.component';
@@ -12,16 +12,16 @@ import { ContentBlock } from '../../shared/content-block/content-block.component
 const materialModules = [MatProgressBar, MatStepperModule, MatIconModule];
 
 @Component({
-  selector: 'app-timetable',
+  selector: 'app-schedule',
   imports: [ContentBlock, AsyncPipe, ...materialModules],
-  templateUrl: './timetable.component.html',
-  styleUrl: './timetable.component.scss',
+  templateUrl: './schedule.component.html',
+  styleUrl: './schedule.component.scss',
 })
-export class TimetableComponent {
+export class ScheduleComponent {
   currentLoadingState = LoadingState.None;
   timelineContent: KeyValue<string, string>[];
 
-  readonly $timetable: Observable<Timetable>;
+  readonly $schedule: Observable<Schedule>;
   readonly LoadingState = LoadingState;
 
   private readonly fireStoreService = inject(FireStoreService);
@@ -29,7 +29,7 @@ export class TimetableComponent {
   constructor() {
     this.currentLoadingState = LoadingState.Loading;
 
-    this.$timetable = from(this.fireStoreService.getTimetable()).pipe(
+    this.$schedule = from(this.fireStoreService.getSchedule()).pipe(
       tap((s) => {
         this.timelineContent = Object.keys(s.timeline.contentPerTime)
           .map((key) => ({ key: key, value: s.timeline.contentPerTime[key] }))

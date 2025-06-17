@@ -6,12 +6,12 @@ import { GalleryComponent } from 'src/app/components/content/gallery/gallery.com
 import { GiftsComponent } from 'src/app/components/content/gifts/gifts.component';
 import { HomeComponent } from 'src/app/components/content/home/home.component';
 import { LocationJourneyComponent } from 'src/app/components/content/location-journey/location-journey.component';
-import { TimetableComponent } from 'src/app/components/content/timetable/timetable.component';
+import { ScheduleComponent } from 'src/app/components/content/schedule/schedule.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'location-journey', component: LocationJourneyComponent },
-  { path: 'timetable', component: TimetableComponent },
+  { path: 'schedule', component: ScheduleComponent },
   { path: 'dresscode', component: DresscodeComponent },
   { path: 'dos-and-donts', component: DosAndDontsComponent },
   { path: 'gifts', component: GiftsComponent },

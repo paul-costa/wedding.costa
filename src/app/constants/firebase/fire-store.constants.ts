@@ -6,6 +6,6 @@ export const HomepageCollection = 'homepage';
 export const MessagesCollection = 'messages';
 export const LocationCollection = 'locationJourney';
 export const DosAndDontsCollection = 'dosAndDonts';
-export const TimetableCollection = 'timetable';
+export const ScheduleCollection = 'schedule';
 export const GiftsCollection = 'gifts';
 export const GalleryCollection = 'gallery';

@@ -4,7 +4,7 @@ import { GalleryComponent } from '../components/content/gallery/gallery.componen
 import { GiftsComponent } from '../components/content/gifts/gifts.component';
 import { HomeComponent } from '../components/content/home/home.component';
 import { LocationJourneyComponent } from '../components/content/location-journey/location-journey.component';
-import { TimetableComponent } from '../components/content/timetable/timetable.component';
+import { ScheduleComponent } from '../components/content/schedule/schedule.component';
 import { Content } from './general.constants';
 import { ContentComponent } from './general.interfaces';
 
@@ -21,16 +21,16 @@ export const ContentComponents: Record<Content, ContentComponent> = {
     icon: 'location_on',
     component: LocationJourneyComponent,
   },
-  [Content.Timetable]: {
+  [Content.Schedule]: {
     title: 'Ablauf',
-    url: 'timetable',
-    icon: 'schedule',
-    component: TimetableComponent,
+    url: 'schedule',
+    icon: 'update',
+    component: ScheduleComponent,
   },
   [Content.Dresscode]: {
     title: 'Dresscode',
     url: 'dresscode',
-    icon: 'person_check',
+    icon: 'checkroom',
     component: DresscodeComponent,
   },
   [Content.DosDonts]: {

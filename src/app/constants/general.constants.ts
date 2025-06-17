@@ -15,7 +15,7 @@ export enum LoadingState {
 export enum Content {
   Home,
   LocationJourney,
-  Timetable,
+  Schedule,
   Dresscode,
   DosDonts,
   Gifts,
