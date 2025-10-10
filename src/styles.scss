@@ -166,6 +166,25 @@ mat-tab-group {
   .mdc-tab__text-label {
     color: $darker-gray !important;
   }
+
+  mat-tab-header {
+    margin-bottom: 24px;
+
+    .mat-mdc-tab {
+      background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.1);
+      border-radius: $default-border-radius;
+      margin: 0 12px;
+
+      &.mdc-tab--active {
+        background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.5);
+        color: $off-white;
+      }
+    }
+
+    .mdc-tab-indicator {
+      display: none;
+    }
+  }
 }
 
 .default-snackbar {

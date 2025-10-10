@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatDialogModule,
     MatSnackBarModule,
   ],
-  providers: [provideAnimationsAsync()],
+  providers: [provideAnimationsAsync(), provideStorage(() => getStorage())],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

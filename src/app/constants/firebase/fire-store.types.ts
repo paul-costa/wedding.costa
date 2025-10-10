@@ -133,7 +133,17 @@ export interface Gifts {
   summary?: ContentBlockHeaderAndList;
 }
 
+export interface GalleryImages {
+  download?: GalleryImagesItem;
+  realImages?: GalleryImagesItem;
+  snapShots?: GalleryImagesItem;
+}
+
+export interface GalleryImagesItem {
+  label?: string;
+}
 export interface Gallery {
   summary?: ContentBlockHeaderAndList;
   access?: ContentBlockHeaderAndList;
+  images?: GalleryImages;
 }

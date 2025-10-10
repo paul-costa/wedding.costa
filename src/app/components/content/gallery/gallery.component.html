@@ -1,11 +1,36 @@
-@let data = $gallery | async;
+@let galleryData = gallery$ | async;
+@let imageUrls = imageUrls$ | async;
 
 @if (currentLoadingState === LoadingState.Loading) {
   <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
-} @else if (currentLoadingState === LoadingState.Success && data) {
+} @else if (currentLoadingState === LoadingState.Success && galleryData) {
   <div class="main-container split">
-    @for (c of [data.summary, data.access]; track $index) {
+    @for (c of [galleryData.summary, galleryData.access]; track $index) {
       <app-content-block [headerText]="c.header" [bodyTexts]="c.content" />
     }
   </div>
+
+  <app-content-block>
+    @let images = galleryData.images;
+
+    <mat-tab-group class="group">
+      <mat-tab [label]="images.realImages.label">
+        @if (currentImagesLoadingState === LoadingState.Loading) {
+          <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
+        } @else if (currentImagesLoadingState === LoadingState.Success && imageUrls) {
+          <ng-container *ngTemplateOutlet="realImagesContainer; context: { $implicit: imageUrls }" />
+        }
+      </mat-tab>
+      <mat-tab [label]="images.snapShots.label"> Content 2 </mat-tab>
+      <mat-tab [label]="images.download.label"> Content 3 </mat-tab>
+    </mat-tab-group>
+  </app-content-block>
 }
+
+<ng-template let-imageUrls #realImagesContainer>
+  <div class="images-container">
+    @for (url of imageUrls; track $index) {
+      <img class="image-item" [src]="url" />
+    }
+  </div>
+</ng-template>

@@ -4,6 +4,7 @@ import 'firebase/firestore';
 import { collection, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
 import { environment } from 'src/config/environment.config';
 
+import { getDownloadURL, getStorage, listAll, ref } from 'firebase/storage';
 import {
   AccountDialogCollection,
   DosAndDontsCollection,
@@ -36,6 +37,7 @@ import { AccountDialogConfig, GuestsDialogCloseConfig } from '../constants/gener
 export class FireStoreService {
   private readonly app = initializeApp(environment.firebase);
   private readonly db = getFirestore(this.app);
+  private readonly storage = getStorage(this.app);
 
   async getAccountDialog(): Promise<AccountDialogConfig> {
     const guests = collection(this.db, GuestsCollection);
@@ -130,5 +132,17 @@ export class FireStoreService {
     const col = collection(this.db, GalleryCollection);
     const snapshot = await getDocs(col);
     return snapshot.docs.map((d) => d.data())[0];
+  }
+
+  async getGalleryImages(folderPath: string = 'images'): Promise<string[]> {
+    const folderRef = ref(this.storage, folderPath);
+    const result = await listAll(folderRef);
+
+    const urls = await Promise.all(result.items.map((item) => getDownloadURL(item)));
+    return urls;
+  }
+
+  async getGalleryImageUrls(): Promise<string[]> {
+    return await this.getGalleryImages('images');
   }
 }

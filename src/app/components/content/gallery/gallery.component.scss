@@ -1,9 +1,25 @@
 @use 'src/styles/config.scss' as *;
+@use '@angular/material' as mat;
 
 .main-container {
   &.split {
     flex-direction: row;
     gap: $default-container-gap;
+  }
+}
+
+.images-container {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 0 12px;
+
+  .image-item {
+    @include mat.elevation(6);
+
+    max-width: 100%;
+    border-radius: $default-border-radius;
   }
 }
 
@@ -13,6 +29,10 @@
       gap: $narrow-container-gap;
     }
   }
+
+  .images-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media only screen and (max-width: $md-breakpoint) {
@@ -20,5 +40,8 @@
     &.split {
       flex-direction: column;
     }
+  }
+  .images-container {
+    display: flex;
   }
 }
