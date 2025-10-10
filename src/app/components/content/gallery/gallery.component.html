@@ -1,5 +1,6 @@
 @let galleryData = gallery$ | async;
 @let imageUrls = imageUrls$ | async;
+@let snapshotUrls = snapshotUrls$ | async;
 
 @if (currentLoadingState === LoadingState.Loading) {
   <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
@@ -11,26 +12,41 @@
   </div>
 
   <app-content-block>
-    @let images = galleryData.images;
-
-    <mat-tab-group class="group">
-      <mat-tab [label]="images.realImages.label">
-        @if (currentImagesLoadingState === LoadingState.Loading) {
-          <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
-        } @else if (currentImagesLoadingState === LoadingState.Success && imageUrls) {
-          <ng-container *ngTemplateOutlet="realImagesContainer; context: { $implicit: imageUrls }" />
-        }
+    <mat-tab-group class="custom-header">
+      <mat-tab [label]="galleryData.images.images.label">
+        <ng-container *ngTemplateOutlet="imagesWrapper; context: { $implicit: imageUrls, loadingState: currentImagesLoadingState }" />
       </mat-tab>
-      <mat-tab [label]="images.snapShots.label"> Content 2 </mat-tab>
-      <mat-tab [label]="images.download.label"> Content 3 </mat-tab>
+
+      <mat-tab [label]="galleryData.images.snapshots.label">
+        <ng-container *ngTemplateOutlet="imagesWrapper; context: { $implicit: snapshotUrls, loadingState: currentSnapshotsLoadingState }" />
+      </mat-tab>
+
+      <mat-tab [label]="galleryData.images.download.label">
+        <ng-container *ngTemplateOutlet="downloadWrapper" />
+      </mat-tab>
     </mat-tab-group>
   </app-content-block>
 }
 
-<ng-template let-imageUrls #realImagesContainer>
-  <div class="images-container">
-    @for (url of imageUrls; track $index) {
-      <img class="image-item" [src]="url" />
-    }
+<ng-template let-urls let-loadingState="loadingState" #imagesWrapper>
+  @if (loadingState === LoadingState.Loading) {
+    <div class="progress-bar-wrapper">
+      <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
+    </div>
+  } @else if (loadingState === LoadingState.Success && urls) {
+    <div class="images-container">
+      @for (url of urls; track $index) {
+        <img class="image-item" [src]="url" />
+      }
+    </div>
+  }
+</ng-template>
+
+<ng-template #downloadWrapper>
+  <div class="download-wrapper">
+    <button mat-raised-button class="download-button mat-button light-green" (click)="onDownloadAllButtonClick()">
+      <mat-icon>download</mat-icon>
+      <span>{{ galleryData.images.download.buttonLabel }} </span>
+    </button>
   </div>
 </ng-template>

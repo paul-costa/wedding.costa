@@ -134,15 +134,11 @@ export class FireStoreService {
     return snapshot.docs.map((d) => d.data())[0];
   }
 
-  async getGalleryImages(folderPath: string = 'images'): Promise<string[]> {
+  async getGalleryUrls(folderPath: string = 'images'): Promise<string[]> {
     const folderRef = ref(this.storage, folderPath);
     const result = await listAll(folderRef);
 
     const urls = await Promise.all(result.items.map((item) => getDownloadURL(item)));
     return urls;
-  }
-
-  async getGalleryImageUrls(): Promise<string[]> {
-    return await this.getGalleryImages('images');
   }
 }

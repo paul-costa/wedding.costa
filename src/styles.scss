@@ -43,7 +43,9 @@ body {
   color: rgba(var(--mat-sys-on-surface), 0.5);
 }
 
-/* --- shared general components ----------------------------------------------------- */
+/*
+*--- shared general components -----------------------------------------------------
+*/
 
 .display-none {
   display: none;
@@ -103,7 +105,9 @@ body {
   }
 }
 
-/* --- shared wrapping component ----------------------------------------------------- */
+/*
+* --- shared wrapping component -----------------------------------------------------
+*/
 
 .main-container {
   display: flex;
@@ -122,7 +126,9 @@ body {
   }
 }
 
-/* --- material custom styles ----------------------------------------------------- */
+/*
+* --- material custom styles -----------------------------------------------------
+*/
 
 .mat-drawer {
   border-radius: 0 !important;
@@ -165,24 +171,36 @@ mat-tab-group {
 
   .mdc-tab__text-label {
     color: $darker-gray !important;
+    font-family: $default-header-font !important;
   }
 
-  mat-tab-header {
-    margin-bottom: 24px;
+  &.custom-header {
+    mat-tab-header {
+      margin-bottom: 24px;
 
-    .mat-mdc-tab {
-      background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.1);
-      border-radius: $default-border-radius;
-      margin: 0 12px;
+      .mat-mdc-tab {
+        background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.15);
+        border-radius: $default-border-radius;
+        margin: 0 12px;
 
-      &.mdc-tab--active {
-        background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.5);
-        color: $off-white;
+        &.mdc-tab--active {
+          background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.75);
+          color: $off-white;
+
+          .mdc-tab__text-label {
+            color: $off-white !important;
+            font-size: $md-font-size;
+          }
+        }
+
+        .mdc-tab__text-label {
+          font-size: $sm-font-size;
+        }
       }
-    }
 
-    .mdc-tab-indicator {
-      display: none;
+      .mdc-tab-indicator {
+        display: none;
+      }
     }
   }
 }
@@ -228,9 +246,9 @@ mat-stepper {
   }
 }
 
-/**
-*  Additional Info Card-------------------------------------------------------------------------------
-**/
+/*
+*  additional info card-------------------------------------------------------------------------------
+*/
 
 .additional-info-card {
   @include mat.elevation(4, rgba($mat-theme-neutralVariant-turquoise, 0.2));

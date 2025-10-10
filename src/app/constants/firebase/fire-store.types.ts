@@ -1,5 +1,9 @@
 import { DocumentReference } from 'firebase/firestore/lite';
 
+/*
+ * --- Account --------------------------------------------
+ */
+
 export interface AccountDialog {
   header?: string;
   subHeader?: string;
@@ -13,6 +17,10 @@ export interface AccountDialog {
   guestSubmittedMessage?: string;
 }
 
+/*
+ * --- Guest --------------------------------------------
+ */
+
 export interface Guest {
   firstName?: string;
   lastName?: string;
@@ -20,6 +28,10 @@ export interface Guest {
   role?: string;
   isGuestShowingUp?: boolean;
 }
+
+/*
+ * --- Homepage & Messages --------------------------------------------
+ */
 
 export interface Homepage {
   introText?: string;
@@ -59,6 +71,10 @@ export interface Contact {
   address?: Address;
 }
 
+/*
+ * --- Dresscode --------------------------------------------
+ */
+
 export interface Dresscode {
   summaryHeaderText?: string;
   summaryBodyTexts?: string[];
@@ -81,6 +97,10 @@ export interface Hyperlink {
   linkUrl?: string;
   linkNote?: string;
 }
+
+/*
+ * --- Location & Journey --------------------------------------------
+ */
 
 export interface LocationJourney {
   location?: LocationInfo;
@@ -114,12 +134,19 @@ export interface Address {
   countryCode?: string;
 }
 
+/*
+ * --- Does & Donts --------------------------------------------
+ */
+
 export interface DoesAndDonts {
   summary?: ContentBlockHeaderAndList;
   before?: ContentBlockHeaderAndList;
   during?: ContentBlockHeaderAndList;
 }
 
+/*
+ * --- Schedule --------------------------------------------
+ */
 export interface Schedule {
   summary?: ContentBlockHeaderAndList;
   more?: ContentBlockHeaderAndList;
@@ -129,19 +156,28 @@ export interface Schedule {
   };
 }
 
+/*
+ * --- Gifts --------------------------------------------
+ */
 export interface Gifts {
   summary?: ContentBlockHeaderAndList;
 }
 
-export interface GalleryImages {
-  download?: GalleryImagesItem;
-  realImages?: GalleryImagesItem;
-  snapShots?: GalleryImagesItem;
-}
+/*
+ * --- Gallery --------------------------------------------
+ */
 
 export interface GalleryImagesItem {
   label?: string;
+  buttonLabel?: string;
 }
+
+export interface GalleryImages {
+  download?: GalleryImagesItem;
+  images?: GalleryImagesItem;
+  snapshots?: GalleryImagesItem;
+}
+
 export interface Gallery {
   summary?: ContentBlockHeaderAndList;
   access?: ContentBlockHeaderAndList;

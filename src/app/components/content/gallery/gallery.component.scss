@@ -8,6 +8,13 @@
   }
 }
 
+/*
+* --- images ------------------------------------------------------------------------
+*/
+.progress-bar-wrapper {
+  height: 4px;
+}
+
 .images-container {
   max-width: 100%;
   display: grid;
@@ -22,6 +29,19 @@
     border-radius: $default-border-radius;
   }
 }
+
+.download-wrapper {
+  margin: 12px;
+  display: flex;
+
+  .download-button {
+    flex: 1;
+  }
+}
+
+/*
+* --- breakpoint optimization -------------------------------------------------------
+*/
 
 @media only screen and (max-width: $lg-breakpoint) {
   .main-container {
