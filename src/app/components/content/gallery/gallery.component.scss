@@ -62,8 +62,15 @@
       flex-direction: column;
     }
   }
+
   .images-container {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: $sm-breakpoint) {
+  .images-container {
+    margin: 12px 0;
   }
 }

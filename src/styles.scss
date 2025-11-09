@@ -215,6 +215,10 @@ mat-tab-group {
           gap: 6px;
         }
       }
+
+      @media only screen and (max-width: $sm-breakpoint) {
+        margin: 0 0 12px;
+      }
     }
   }
 }
