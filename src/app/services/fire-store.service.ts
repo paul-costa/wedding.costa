@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import 'firebase/firestore';
 import { collection, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
-import { environment } from 'src/config/environment.config';
-
 import { getDownloadURL, getStorage, listAll, ref } from 'firebase/storage';
+import { environment } from 'src/config/environment.config';
 import {
   AccountDialogCollection,
   DosAndDontsCollection,
@@ -144,7 +143,7 @@ export class FireStoreService {
 
   async getGalleryDownload(): Promise<string> {
     const zipRef = ref(this.storage, '/Hochzeit-Costa.zip');
-    return await getDownloadURL(zipRef)
-  }
 
+    return await getDownloadURL(zipRef);
+  }
 }

@@ -6,7 +6,7 @@ import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { Observable, finalize, from, tap } from 'rxjs';
+import { Observable, finalize, from } from 'rxjs';
 import { Gallery } from 'src/app/constants/firebase/fire-store.types';
 import { DefaultSnackbarConfig, LoadingState } from 'src/app/constants/general.constants';
 import { FireStoreService } from 'src/app/services/fire-store.service';
@@ -49,7 +49,6 @@ export class GalleryComponent {
       }),
     );
     this.snapshotUrls$ = from(this.fireStoreService.getGalleryUrls('snapshots')).pipe(
-      tap(urls => {console.log(urls)}),
       finalize(() => {
         this.currentSnapshotsLoadingState = LoadingState.Success;
       }),
@@ -59,16 +58,19 @@ export class GalleryComponent {
   onDownloadAllButtonClick() {
     this.currentDownloadLoadingState = LoadingState.Loading;
 
-    this.fireStoreService.getGalleryDownload().then(url => {
-      const anchor = document.createElement('a');
-      anchor.href = url;
-      document.body.appendChild(anchor);
-      anchor.click();
-      document.body.removeChild(anchor);
-      this.currentDownloadLoadingState = LoadingState.Success;
-    }).catch(() => {
-      this.currentDownloadLoadingState = LoadingState.Error;
-      this._snackBar.open("Fehler beim Download aufgetreten!", null, DefaultSnackbarConfig);
-    })
+    this.fireStoreService
+      .getGalleryDownload()
+      .then((url) => {
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        document.body.appendChild(anchor);
+        anchor.click();
+        document.body.removeChild(anchor);
+        this.currentDownloadLoadingState = LoadingState.Success;
+      })
+      .catch(() => {
+        this.currentDownloadLoadingState = LoadingState.Error;
+        this._snackBar.open('Fehler beim Download aufgetreten!', null, DefaultSnackbarConfig);
+      });
   }
 }
