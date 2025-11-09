@@ -25,7 +25,7 @@ html {
         theme-type: dark,
         primary: mat.$azure-palette,
       ),
-      typography: Roboto,
+      typography: Roboto Flex,
       density: 0,
     )
   );
@@ -176,12 +176,11 @@ mat-tab-group {
 
   &.custom-header {
     mat-tab-header {
-      margin-bottom: 24px;
+      margin: 0 12px 12px;
 
       .mat-mdc-tab {
         background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.15);
         border-radius: $default-border-radius;
-        margin: 0 12px;
 
         &.mdc-tab--active {
           background-color: rgba($color: $mat-theme-primary-green, $alpha: 0.75);
@@ -201,6 +200,22 @@ mat-tab-group {
       .mdc-tab-indicator {
         display: none;
       }
+
+      .mat-mdc-tab-labels {
+        gap: 24px;
+      }
+
+
+      @media only screen and (max-width: $md-breakpoint) {
+        .mat-mdc-tab {
+          margin: 0;
+        }
+
+        .mat-mdc-tab-labels {
+          flex-direction: column;
+          gap: 6px;
+        }
+      }
     }
   }
 }
@@ -208,7 +223,7 @@ mat-tab-group {
 .default-snackbar {
   --mdc-snackbar-container-color: #2e5867;
   --mdc-snackbar-supporting-text-color: #f5f0e1;
-  --mdc-snackbar-supporting-text-font: 'Roboto', sans-serif;
+  --mdc-snackbar-supporting-text-font: 'Roboto Flex', sans-serif;
   --mdc-snackbar-supporting-text-weight: 300;
   --mdc-snackbar-supporting-text-size: 20px;
   --mdc-snackbar-supporting-text-line-height: 20px;

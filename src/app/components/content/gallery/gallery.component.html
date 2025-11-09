@@ -3,47 +3,55 @@
 @let snapshotUrls = snapshotUrls$ | async;
 
 @if (currentLoadingState === LoadingState.Loading) {
-  <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
+<mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
 } @else if (currentLoadingState === LoadingState.Success && galleryData) {
-  <div class="main-container split">
-    @for (c of [galleryData.summary, galleryData.access]; track $index) {
-      <app-content-block [headerText]="c.header" [bodyTexts]="c.content" />
-    }
-  </div>
+<div class="main-container split">
+  @for (c of [galleryData.summary, galleryData.access]; track $index) {
+  <app-content-block [headerText]="c.header" [bodyTexts]="c.content" />
+  }
+</div>
 
-  <app-content-block>
-    <mat-tab-group class="custom-header">
-      <mat-tab [label]="galleryData.images.images.label">
-        <ng-container *ngTemplateOutlet="imagesWrapper; context: { $implicit: imageUrls, loadingState: currentImagesLoadingState }" />
-      </mat-tab>
+<app-content-block>
+  <mat-tab-group class="custom-header">
+    <mat-tab [label]="galleryData.images.images.label">
+      <ng-container
+        *ngTemplateOutlet="imagesWrapper; context: { $implicit: imageUrls, loadingState: currentImagesLoadingState }" />
+    </mat-tab>
 
-      <mat-tab [label]="galleryData.images.snapshots.label">
-        <ng-container *ngTemplateOutlet="imagesWrapper; context: { $implicit: snapshotUrls, loadingState: currentSnapshotsLoadingState }" />
-      </mat-tab>
+    <mat-tab [label]="galleryData.images.snapshots.label">
+      <ng-container
+        *ngTemplateOutlet="imagesWrapper; context: { $implicit: snapshotUrls, loadingState: currentSnapshotsLoadingState }" />
+    </mat-tab>
 
-      <mat-tab [label]="galleryData.images.download.label">
-        <ng-container *ngTemplateOutlet="downloadWrapper" />
-      </mat-tab>
-    </mat-tab-group>
-  </app-content-block>
+    <mat-tab [label]="galleryData.images.download.label">
+      <ng-container *ngTemplateOutlet="downloadWrapper" />
+    </mat-tab>
+  </mat-tab-group>
+</app-content-block>
 }
 
 <ng-template let-urls let-loadingState="loadingState" #imagesWrapper>
   @if (loadingState === LoadingState.Loading) {
-    <div class="progress-bar-wrapper">
-      <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
-    </div>
+  <div class="progress-bar-wrapper">
+    <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
+  </div>
   } @else if (loadingState === LoadingState.Success && urls) {
-    <div class="images-container">
-      @for (url of urls; track $index) {
-        <img class="image-item" [src]="url" />
-      }
-    </div>
+  <div class="images-container">
+    @for (url of urls; track $index) {
+    <img class="image-item" [src]="url" />
+    }
+  </div>
   }
 </ng-template>
 
 <ng-template #downloadWrapper>
   <div class="download-wrapper">
+    @if (currentDownloadLoadingState === LoadingState.Loading) {
+    <div class="progress-bar-wrapper">
+      <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
+    </div>
+    }
+
     <button mat-raised-button class="download-button mat-button light-green" (click)="onDownloadAllButtonClick()">
       <mat-icon>download</mat-icon>
       <span>{{ galleryData.images.download.buttonLabel }} </span>

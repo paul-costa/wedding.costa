@@ -141,4 +141,10 @@ export class FireStoreService {
     const urls = await Promise.all(result.items.map((item) => getDownloadURL(item)));
     return urls;
   }
+
+  async getGalleryDownload(): Promise<string> {
+    const zipRef = ref(this.storage, '/Hochzeit-Costa.zip');
+    return await getDownloadURL(zipRef)
+  }
+
 }

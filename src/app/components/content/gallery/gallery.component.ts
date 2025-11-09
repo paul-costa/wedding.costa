@@ -4,10 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { Observable, finalize, from } from 'rxjs';
+import { Observable, finalize, from, tap } from 'rxjs';
 import { Gallery } from 'src/app/constants/firebase/fire-store.types';
-import { LoadingState } from 'src/app/constants/general.constants';
+import { DefaultSnackbarConfig, LoadingState } from 'src/app/constants/general.constants';
 import { FireStoreService } from 'src/app/services/fire-store.service';
 import { ContentBlock } from '../../shared/content-block/content-block.component';
 
@@ -25,6 +26,7 @@ export class GalleryComponent {
   currentLoadingState = LoadingState.Loading;
   currentImagesLoadingState = LoadingState.Loading;
   currentSnapshotsLoadingState = LoadingState.Loading;
+  currentDownloadLoadingState = LoadingState.None;
 
   readonly gallery$: Observable<Gallery>;
   readonly imageUrls$: Observable<string[]>;
@@ -33,6 +35,7 @@ export class GalleryComponent {
   readonly LoadingState = LoadingState;
 
   private readonly fireStoreService = inject(FireStoreService);
+  private readonly _snackBar = inject(MatSnackBar);
 
   constructor() {
     this.gallery$ = from(this.fireStoreService.getGallery()).pipe(
@@ -46,6 +49,7 @@ export class GalleryComponent {
       }),
     );
     this.snapshotUrls$ = from(this.fireStoreService.getGalleryUrls('snapshots')).pipe(
+      tap(urls => {console.log(urls)}),
       finalize(() => {
         this.currentSnapshotsLoadingState = LoadingState.Success;
       }),
@@ -53,6 +57,18 @@ export class GalleryComponent {
   }
 
   onDownloadAllButtonClick() {
-    console.log('TODO');
+    this.currentDownloadLoadingState = LoadingState.Loading;
+
+    this.fireStoreService.getGalleryDownload().then(url => {
+      const anchor = document.createElement('a');
+      anchor.href = url;
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+      this.currentDownloadLoadingState = LoadingState.Success;
+    }).catch(() => {
+      this.currentDownloadLoadingState = LoadingState.Error;
+      this._snackBar.open("Fehler beim Download aufgetreten!", null, DefaultSnackbarConfig);
+    })
   }
 }

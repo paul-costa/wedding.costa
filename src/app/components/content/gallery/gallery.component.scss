@@ -1,5 +1,6 @@
 @use 'src/styles/config.scss' as *;
 @use '@angular/material' as mat;
+@use '../../../../styles/_mixins.scss' as mixin;
 
 .main-container {
   &.split {
@@ -20,10 +21,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  margin: 0 12px;
+  margin: 12px;
 
   .image-item {
-    @include mat.elevation(6);
+    @include mat.elevation(4);
 
     max-width: 100%;
     border-radius: $default-border-radius;
@@ -63,5 +64,6 @@
   }
   .images-container {
     display: flex;
+    flex-direction: column;
   }
 }
