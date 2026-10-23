@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Subject, takeUntil } from 'rxjs';
 import { ContentBlock } from 'src/app/components/shared/content-block/content-block.component';
 import { Messages, UserMessage } from 'src/app/constants/firebase/fire-store.types';
 import { LoadingState, LocalStorageKeys } from 'src/app/constants/general.constants';
@@ -23,70 +24,62 @@ export class MessagesComponent implements OnDestroy {
   @Input()
   config: Messages;
 
-  currentLoadingState = LoadingState.None;
+  currentLoadingState = LoadingState.Loading;
+  isSending = false;
+  /** newest first, the list is rendered bottom-up */
   userMessages: UserMessage[] = [];
 
-  readonly currentUserMessage = new FormControl<string>('', [Validators.required]);
+  readonly currentUserMessage = new FormControl<string>('', [Validators.required, Validators.maxLength(1000)]);
   readonly LoadingState = LoadingState;
   readonly MessageAdminFirstNames = MessageAdminFirstNames;
 
-  private readonly messageFetchInterval: ReturnType<typeof setInterval>;
+  private readonly destroy$ = new Subject<void>();
   private readonly fireStoreService = inject(FireStoreService);
 
   constructor() {
-    this.fetchAndSetUserMessages();
-
-    this.messageFetchInterval = setInterval(() => {
-      this.fetchAndSetUserMessages(true);
-    }, 5000);
+    this.fireStoreService
+      .observeUserMessages()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (userMessages) => {
+          this.userMessages = userMessages.reverse();
+          this.currentLoadingState = LoadingState.Success;
+        },
+        error: (err) => {
+          console.error(err);
+          this.currentLoadingState = LoadingState.Error;
+        },
+      });
   }
 
   ngOnDestroy() {
-    clearInterval(this.messageFetchInterval);
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   onSendUserMessageButtonClick() {
     this.currentUserMessage.markAsTouched();
 
-    if (this.currentUserMessage.invalid) {
+    if (this.currentUserMessage.invalid || this.isSending) {
       return;
     }
 
-    this.currentLoadingState = LoadingState.Loading;
+    this.isSending = true;
 
     const userMessage: UserMessage = {
       id: crypto.randomUUID(),
-      value: this.currentUserMessage.value,
+      value: this.currentUserMessage.value.trim(),
       date: new Date(),
-      authorFirstName: localStorage.getItem(LocalStorageKeys.SubmittedGuestFirstName),
+      authorFirstName: localStorage.getItem(LocalStorageKeys.SubmittedGuestFirstName) ?? '',
     };
 
-    this.fireStoreService.sendUserMessage(userMessage).then((res) => {
-      if (res) {
-        this.currentUserMessage.reset();
-        this.fetchAndSetUserMessages();
-        return;
-      }
-
-      this.currentLoadingState = LoadingState.Error;
-    });
-  }
-
-  private fetchAndSetUserMessages(hideLoading = false) {
-    if (!hideLoading) {
-      this.currentLoadingState = LoadingState.Loading;
-    }
-
     this.fireStoreService
-      .getUserMessages()
+      .sendUserMessage(userMessage)
+      .then(() => this.currentUserMessage.reset(''))
       .catch((err) => {
-        this.currentLoadingState = LoadingState.Error;
         console.error(err);
-        return [] as UserMessage[];
+        this.currentLoadingState = LoadingState.Error;
       })
-      .then((userMessages) => {
-        this.userMessages = userMessages.reverse();
-        this.currentLoadingState = LoadingState.Success;
-      });
+      .finally(() => (this.isSending = false));
   }
 }

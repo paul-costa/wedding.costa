@@ -3,7 +3,7 @@
     <div class="messages">
       @switch (currentLoadingState) {
         @case (LoadingState.Success) {
-          @for (userMessage of userMessages; track $index) {
+          @for (userMessage of userMessages; track userMessage.id) {
             <div class="message" [ngClass]="{ admin: MessageAdminFirstNames.includes(userMessage.authorFirstName) }">
               <span>{{ userMessage.value }}</span>
               <div class="meta-data">
@@ -25,13 +25,13 @@
     <div class="input-form-container">
       <mat-form-field class="input-form">
         <mat-label>{{ config.messagesInputHeaderLabel }}</mat-label>
-        <textarea matInput required cdkTextareaAutosize [formControl]="currentUserMessage"></textarea>
+        <textarea matInput required cdkTextareaAutosize [formControl]="currentUserMessage" (keydown.control.enter)="onSendUserMessageButtonClick()"></textarea>
         @if (currentUserMessage.invalid) {
           <mat-error>{{ config.messagesInputInvalidLabel }}</mat-error>
         }
       </mat-form-field>
 
-      <button mat-icon-button class="send-button" (click)="onSendUserMessageButtonClick()">
+      <button mat-icon-button class="send-button" title="Senden" [disabled]="isSending" (click)="onSendUserMessageButtonClick()">
         <mat-icon>send</mat-icon>
       </button>
     </div>

@@ -36,7 +36,7 @@
   } @else if (loadingState === LoadingState.Success && urls) {
     <div class="images-container">
       @for (url of urls; track $index) {
-        <img class="image-item" [src]="url" />
+        <img class="image-item" [src]="url" loading="lazy" decoding="async" alt="" />
       }
     </div>
   }

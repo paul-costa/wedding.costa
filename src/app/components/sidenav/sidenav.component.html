@@ -1,17 +1,17 @@
 <nav class="navbar" [ngClass]="{ hidden: sidenavHidden }">
   <div class="logo" (click)="onToggleSidenavClick(!sidenavHidden)">
-    <img src="assets/wedding-ring/wedding-ring.svg" />
+    <img src="assets/wedding-ring/wedding-ring.svg" alt="" />
     <span>V. & P. Costa</span>
   </div>
 
-  @for (c of contentComponents; track $index) {
-    <button mat-button class="button" [ngClass]="{ active: currentContentComponent?.url === c.url }" [routerLink]="c.url">
+  @for (c of contentComponents; track c.url) {
+    <button mat-button class="button" [ngClass]="{ active: currentContentComponent?.url === c.url }" [routerLink]="c.url" [title]="c.title">
       <mat-icon class="button-icon"> {{ c.icon }} </mat-icon>
       <span> {{ c.title }} </span>
     </button>
   }
 
-  <button mat-button class="button account" color="primary" (click)="onAccountButtonClick()">
+  <button mat-button class="button account" title="Account (Ich)" (click)="onAccountButtonClick()">
     <mat-icon class="button-icon"> manage_accounts </mat-icon>
     <span> Account (Ich) </span>
   </button>

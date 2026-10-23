@@ -26,8 +26,11 @@
   .image-item {
     @include mat.elevation(4);
 
-    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
     border-radius: $default-border-radius;
+    background-color: rgba($mat-theme-primary-green, 0.08);
   }
 }
 

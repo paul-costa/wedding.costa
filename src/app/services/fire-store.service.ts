@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from 'firebase/app';
-import 'firebase/firestore';
-import { collection, doc, getDocs, getFirestore, setDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, onSnapshot, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
 import { getDownloadURL, getStorage, listAll, ref } from 'firebase/storage';
+import { Observable } from 'rxjs';
 import { environment } from 'src/config/environment.config';
 import {
   AccountDialogCollection,
@@ -39,11 +39,10 @@ export class FireStoreService {
   private readonly storage = getStorage(this.app);
 
   async getAccountDialog(): Promise<AccountDialogConfig> {
-    const guests = collection(this.db, GuestsCollection);
-    const guestsSnapshot = await getDocs(guests);
-
-    const accountDialog = collection(this.db, AccountDialogCollection);
-    const accountSnapshot = await getDocs(accountDialog);
+    const [guestsSnapshot, accountSnapshot] = await Promise.all([
+      getDocs(collection(this.db, GuestsCollection)),
+      getDocs(collection(this.db, AccountDialogCollection)),
+    ]);
 
     return {
       guests: guestsSnapshot.docs.map((d) => d.data()),
@@ -51,99 +50,88 @@ export class FireStoreService {
     };
   }
 
-  async setGuest(guestsDialogCloseConfig: GuestsDialogCloseConfig): Promise<boolean> {
+  async setGuest(guestsDialogCloseConfig: GuestsDialogCloseConfig): Promise<void> {
     const docRef = doc(this.db, GuestsCollection, guestsDialogCloseConfig.selectedGuest.id);
 
-    return new Promise((resolve) => {
-      setDoc(docRef, { ...guestsDialogCloseConfig.selectedGuest, isGuestShowingUp: guestsDialogCloseConfig.isGuestShowingUp }).then(() =>
-        resolve(true),
-      );
-    });
+    await setDoc(docRef, { ...guestsDialogCloseConfig.selectedGuest, isGuestShowingUp: guestsDialogCloseConfig.isGuestShowingUp });
   }
 
-  async getHomepage(): Promise<Homepage> {
-    const col = collection(this.db, HomepageCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getHomepage(): Promise<Homepage> {
+    return this.getFirstDocument(HomepageCollection);
   }
 
-  async getMessages(): Promise<Messages> {
-    const col = collection(this.db, MessagesCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getMessages(): Promise<Messages> {
+    return this.getFirstDocument(MessagesCollection);
   }
 
-  async getUserMessages(): Promise<UserMessage[]> {
-    const col = collection(this.db, UserMessagesCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs
-      .map((d) => d.data() as UserMessage)
-      .map((d) => ({ ...d, date: new Date(d.date['seconds'] * 1000) }))
-      .sort((mA, mB) => mA.date.getTime() - mB.date.getTime());
+  /** Live stream of the guest book, oldest message first. */
+  observeUserMessages(): Observable<UserMessage[]> {
+    const messagesQuery = query(collection(this.db, UserMessagesCollection), orderBy('date', 'asc'));
+
+    return new Observable((subscriber) =>
+      onSnapshot(
+        messagesQuery,
+        (snapshot) => {
+          subscriber.next(
+            snapshot.docs.map((d) => {
+              const data = d.data() as Omit<UserMessage, 'date'> & { date: Timestamp };
+              return { ...data, date: data.date.toDate() };
+            }),
+          );
+        },
+        (err) => subscriber.error(err),
+      ),
+    );
   }
 
-  async sendUserMessage(message: UserMessage): Promise<boolean> {
-    const docRef = doc(this.db, UserMessagesCollection, message.id);
-
-    return new Promise((resolve) => {
-      setDoc(docRef, message).then(() => resolve(true));
-    });
+  async sendUserMessage(message: UserMessage): Promise<void> {
+    await setDoc(doc(this.db, UserMessagesCollection, message.id), message);
   }
 
-  async getDresscode(): Promise<Dresscode> {
-    const col = collection(this.db, DresscodeCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getDresscode(): Promise<Dresscode> {
+    return this.getFirstDocument(DresscodeCollection);
   }
 
   async getLocationJourney(): Promise<LocationJourney> {
-    const col = collection(this.db, LocationCollection);
-    const snapshot = await getDocs(col);
+    const snapshot = await getDocs(collection(this.db, LocationCollection));
+
     return snapshot.docs
       .map((res) => {
-        const id = res.data()?.id;
-        const resData = res.data();
-        delete resData.id;
+        const { id, ...resData } = res.data();
         return { [id]: resData };
       })
       .reduce((f1, f2) => ({ ...f1, ...f2 }), {});
   }
 
-  async getDosAndDonts(): Promise<DoesAndDonts> {
-    const col = collection(this.db, DosAndDontsCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getDosAndDonts(): Promise<DoesAndDonts> {
+    return this.getFirstDocument(DosAndDontsCollection);
   }
 
-  async getSchedule(): Promise<Schedule> {
-    const col = collection(this.db, ScheduleCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getSchedule(): Promise<Schedule> {
+    return this.getFirstDocument(ScheduleCollection);
   }
 
-  async getGifts(): Promise<Gifts> {
-    const col = collection(this.db, GiftsCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getGifts(): Promise<Gifts> {
+    return this.getFirstDocument(GiftsCollection);
   }
 
-  async getGallery(): Promise<Gallery> {
-    const col = collection(this.db, GalleryCollection);
-    const snapshot = await getDocs(col);
-    return snapshot.docs.map((d) => d.data())[0];
+  getGallery(): Promise<Gallery> {
+    return this.getFirstDocument(GalleryCollection);
   }
 
-  async getGalleryUrls(folderPath: string = 'images'): Promise<string[]> {
-    const folderRef = ref(this.storage, folderPath);
-    const result = await listAll(folderRef);
+  async getGalleryUrls(folderPath: 'images' | 'snapshots' = 'images'): Promise<string[]> {
+    const result = await listAll(ref(this.storage, folderPath));
 
-    const urls = await Promise.all(result.items.map((item) => getDownloadURL(item)));
-    return urls;
+    return Promise.all(result.items.map((item) => getDownloadURL(item)));
   }
 
-  async getGalleryDownload(): Promise<string> {
-    const zipRef = ref(this.storage, '/Hochzeit-Costa.zip');
+  getGalleryDownload(): Promise<string> {
+    return getDownloadURL(ref(this.storage, '/Hochzeit-Costa.zip'));
+  }
 
-    return await getDownloadURL(zipRef);
+  private async getFirstDocument<T>(collectionName: string): Promise<T> {
+    const snapshot = await getDocs(collection(this.db, collectionName));
+
+    return snapshot.docs.map((d) => d.data() as T)[0];
   }
 }

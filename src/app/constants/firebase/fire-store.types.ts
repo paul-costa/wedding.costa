@@ -1,4 +1,4 @@
-import { DocumentReference } from 'firebase/firestore/lite';
+import { DocumentReference } from 'firebase/firestore';
 
 /*
  * --- Account --------------------------------------------

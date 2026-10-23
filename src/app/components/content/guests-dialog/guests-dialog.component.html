@@ -1,50 +1,54 @@
-<div *ngIf="content" class="container">
-  <div class="header-container">
-    <span class="header" [innerHTML]="content.header"> </span>
-    <span class="sub-header" [innerHTML]="content.subHeader"> </span>
-  </div>
+@if (content) {
+  <div class="container">
+    <div class="header-container">
+      <span class="header" [innerHTML]="content.header"> </span>
+      <span class="sub-header" [innerHTML]="content.subHeader"> </span>
+    </div>
 
-  <div class="guests-select-container">
-    <mat-form-field class="guests-form-field">
-      <mat-label>{{ content.guestSelectLabel }} </mat-label>
-      <mat-select [(value)]="selectedGuestId" (selectionChange)="onSelectedGuestChange($event.value)">
-        <mat-option *ngFor="let guest of guests" [value]="guest.id">
-          <span> {{ guest.lastName }} {{ guest.firstName }} </span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <div class="guests-select-container">
+      <mat-form-field class="guests-form-field">
+        <mat-label>{{ content.guestSelectLabel }} </mat-label>
+        <mat-select [(value)]="selectedGuestId" (selectionChange)="onSelectedGuestChange($event.value)">
+          @for (guest of guests; track guest.id) {
+            <mat-option [value]="guest.id">
+              <span> {{ guest.lastName }} {{ guest.firstName }} </span>
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <div class="disclaimer-container">
-    <span class="disclaimer" [innerHTML]="content.disclaimer"></span>
-  </div>
+    <div class="disclaimer-container">
+      <span class="disclaimer" [innerHTML]="content.disclaimer"></span>
+    </div>
 
-  <div class="actions-container">
-    <mat-radio-group
-      class="radio-button-group"
-      [ngClass]="{ disabled: !selectedGuestId }"
-      color="primary"
-      [disabled]="!selectedGuestId"
-      [matTooltip]="!selectedGuestId ? content.disabledGuestTooltip : null"
-      [(ngModel)]="isGuestShowingUp"
-    >
-      <mat-radio-button [value]="true">{{ content.isShowingUpLabel }}</mat-radio-button>
-      <mat-radio-button [value]="false">{{ content.isNotShowingUpLabel }}</mat-radio-button>
-    </mat-radio-group>
-
-    <div class="action-buttons-container">
-      <button mat-stroked-button class="mat-button light-green" (click)="onCancelButtonClick()">
-        {{ content.actionCancelLabel }}
-      </button>
-      <button
-        mat-flat-button
-        class="mat-button light-green confirm-button"
-        [ngClass]="{ disabled: !selectedGuestId || isGuestShowingUp === undefined }"
-        [disabled]="!selectedGuestId || isGuestShowingUp === undefined"
-        (click)="onConfirmButtonClick()"
+    <div class="actions-container">
+      <mat-radio-group
+        class="radio-button-group"
+        [ngClass]="{ disabled: !selectedGuestId }"
+        color="primary"
+        [disabled]="!selectedGuestId"
+        [matTooltip]="!selectedGuestId ? content.disabledGuestTooltip : null"
+        [(ngModel)]="isGuestShowingUp"
       >
-        {{ content.actionConfirmLabel }}
-      </button>
+        <mat-radio-button [value]="true">{{ content.isShowingUpLabel }}</mat-radio-button>
+        <mat-radio-button [value]="false">{{ content.isNotShowingUpLabel }}</mat-radio-button>
+      </mat-radio-group>
+
+      <div class="action-buttons-container">
+        <button mat-stroked-button class="mat-button light-green" (click)="onCancelButtonClick()">
+          {{ content.actionCancelLabel }}
+        </button>
+        <button
+          mat-flat-button
+          class="mat-button light-green confirm-button"
+          [ngClass]="{ disabled: !selectedGuestId || isGuestShowingUp === undefined }"
+          [disabled]="!selectedGuestId || isGuestShowingUp === undefined"
+          (click)="onConfirmButtonClick()"
+        >
+          {{ content.actionConfirmLabel }}
+        </button>
+      </div>
     </div>
   </div>
-</div>
+}

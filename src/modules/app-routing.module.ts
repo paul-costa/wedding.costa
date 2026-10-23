@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { provideRouter, RouterModule, Routes, withComponentInputBinding } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { DosAndDontsComponent } from 'src/app/components/content/dos-and-donts/dos-and-donts.component';
 import { DresscodeComponent } from 'src/app/components/content/dresscode/dresscode.component';
 import { GalleryComponent } from 'src/app/components/content/gallery/gallery.component';
@@ -16,21 +16,12 @@ export const routes: Routes = [
   { path: 'dos-and-donts', component: DosAndDontsComponent },
   { path: 'gifts', component: GiftsComponent },
   { path: 'gallery', component: GalleryComponent },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [provideRouter(routes, withComponentInputBinding())],
 })
 export class AppRoutingModule {}

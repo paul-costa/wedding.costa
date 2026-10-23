@@ -1,18 +1,18 @@
+import { NgClass } from '@angular/common';
 import { Component, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BrowserModule } from '@angular/platform-browser';
+import { RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { ContentComponent } from 'src/app/constants/general.interfaces';
 import { BreakpointObserverService } from 'src/app/services/breakpoint-observer.service';
-import { AppRoutingModule } from 'src/modules/app-routing.module';
 import { ContentComponents } from '../../constants/app.constants';
 
 const materialModules = [MatIconModule, MatButtonModule];
 
 @Component({
   selector: 'app-sidenav',
-  imports: [BrowserModule, AppRoutingModule, ...materialModules],
+  imports: [NgClass, RouterLink, ...materialModules],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss'],
 })
@@ -24,7 +24,6 @@ export class SidenavComponent implements OnDestroy {
   accountButtonClicked = new EventEmitter<void>();
 
   sidenavHidden?: boolean;
-  isXs = false;
 
   readonly contentComponents: ContentComponent[] = Object.values(ContentComponents);
 

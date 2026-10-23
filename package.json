@@ -1,12 +1,13 @@
 {
-  "name": "wedding.costa.wien",
+  "name": "wedding.costa",
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --no-hmr",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "firebase deploy --only hosting,firestore:rules"
   },
   "private": true,
   "dependencies": {
@@ -15,16 +16,12 @@
     "@angular/common": "^19.2.4",
     "@angular/compiler": "^19.2.4",
     "@angular/core": "^19.2.4",
-    "@angular/fire": "^19.0.0",
     "@angular/forms": "^19.2.4",
     "@angular/material": "^19.1.5",
     "@angular/platform-browser": "^19.2.4",
     "@angular/platform-browser-dynamic": "^19.2.4",
     "@angular/router": "^19.2.4",
-    "eslint": "^9.9.0",
-    "firebase": "^10.14.1",
-    "firestore": "^1.1.6",
-    "ng": "^0.0.0",
+    "firebase": "^13.1.0",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-attributes": "^1.0.0",
     "rxjs": "~7.8.0",
@@ -44,6 +41,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "^5.7.3"
+    "typescript": "~5.8.3"
   }
 }

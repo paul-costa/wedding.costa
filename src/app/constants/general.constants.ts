@@ -5,6 +5,10 @@ export enum LocalStorageKeys {
   SubmittedGuestFirstName = 'submittedGuestFirstName',
 }
 
+export enum SessionStorageKeys {
+  AccountDialogDismissed = 'accountDialogDismissed',
+}
+
 export enum LoadingState {
   None,
   Loading,

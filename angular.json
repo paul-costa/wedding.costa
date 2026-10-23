@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wedding.costa.wien": {
+    "wedding.costa": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "wedding.costa.wien:build:production"
+              "buildTarget": "wedding.costa:build:production"
             },
             "development": {
-              "buildTarget": "wedding.costa.wien:build:development"
+              "buildTarget": "wedding.costa:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "wedding.costa.wien:build"
+            "buildTarget": "wedding.costa:build"
           }
         },
         "test": {
