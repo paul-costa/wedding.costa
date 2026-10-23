@@ -1,5 +1,5 @@
 import { AsyncPipe, NgStyle, NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
@@ -20,6 +20,7 @@ const materialModules = [MatProgressBarModule, MatButtonModule, MatCardModule, M
   selector: 'app-location-journey',
   imports: [AsyncPipe, ContentBlock, UserAddressPipe, NgTemplateOutlet, NgStyle, ...materialModules],
   templateUrl: './location-journey.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './location-journey.component.scss',
 })
 export class LocationJourneyComponent {

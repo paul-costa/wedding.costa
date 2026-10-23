@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { Observable, finalize, from } from 'rxjs';
 import { DoesAndDonts } from 'src/app/constants/firebase/fire-store.types';
@@ -13,6 +13,7 @@ const materialModules = [MatProgressBar];
   selector: 'app-dos-and-donts',
   imports: [ContentBlock, AsyncPipe, ...materialModules],
   templateUrl: './dos-and-donts.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dos-and-donts.component.scss',
 })
 export class DosAndDontsComponent {

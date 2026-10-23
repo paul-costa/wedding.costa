@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "strict": false,
     "importHelpers": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -10,11 +10,19 @@
     "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "target": "ES2022",
-    "typeRoots": ["node_modules/@types", "./src/typings"],
+    "typeRoots": [
+      "node_modules/@types",
+      "./src/typings"
+    ],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "src/*": [
+        "./src/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "strictTemplates": true

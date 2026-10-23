@@ -1,5 +1,5 @@
 import { AsyncPipe, KeyValue } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -15,6 +15,7 @@ const materialModules = [MatProgressBar, MatStepperModule, MatIconModule];
   selector: 'app-schedule',
   imports: [ContentBlock, AsyncPipe, ...materialModules],
   templateUrl: './schedule.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './schedule.component.scss',
 })
 export class ScheduleComponent {

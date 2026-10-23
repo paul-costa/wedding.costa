@@ -1,5 +1,5 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBar } from '@angular/material/progress-bar';
@@ -18,6 +18,7 @@ const materialModules = [MatProgressBar, MatTab, MatTabGroup, MatButtonModule, M
   selector: 'app-gallery',
   imports: [ContentBlock, AsyncPipe, NgTemplateOutlet, ...materialModules],
   templateUrl: './gallery.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './gallery.component.scss',
 })
 export class GalleryComponent {

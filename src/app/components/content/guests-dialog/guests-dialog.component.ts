@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -17,6 +17,7 @@ const materialModules = [MatSelectModule, MatFormFieldModule, MatRadioModule, Ma
   selector: 'app-guests-dialog',
   imports: [NgClass, FormsModule, ...materialModules],
   templateUrl: './guests-dialog.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './guests-dialog.component.scss',
 })
 export class GuestsDialogComponent {

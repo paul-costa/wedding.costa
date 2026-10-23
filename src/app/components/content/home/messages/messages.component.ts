@@ -1,5 +1,5 @@
 import { DatePipe, NgClass } from '@angular/common';
-import { Component, inject, Input, OnDestroy } from '@angular/core';
+import { Component, inject, Input, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,6 +18,7 @@ const materialModules = [MatInputModule, MatButtonModule, MatIconModule, MatProg
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [NgClass, ReactiveFormsModule, DatePipe, ContentBlock, ...materialModules],
 })
 export class MessagesComponent implements OnDestroy {

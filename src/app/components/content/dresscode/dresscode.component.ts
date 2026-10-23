@@ -1,5 +1,5 @@
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Observable, finalize, from } from 'rxjs';
 import { Dresscode } from 'src/app/constants/firebase/fire-store.types';
@@ -14,6 +14,7 @@ const materialModules = [MatProgressBarModule];
   selector: 'app-dresscode',
   imports: [AsyncPipe, ContentBlock, NgTemplateOutlet, ...materialModules],
   templateUrl: './dresscode.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dresscode.component.scss',
 })
 export class DresscodeComponent {

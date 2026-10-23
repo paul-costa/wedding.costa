@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, inject, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, Output, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -15,6 +15,7 @@ const materialModules = [MatIconModule, MatButtonModule];
   selector: 'app-sidenav',
   imports: [NgClass, RouterLink, ...materialModules],
   templateUrl: './sidenav.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnDestroy {

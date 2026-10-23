@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { Observable, finalize, from } from 'rxjs';
 import { Gifts } from 'src/app/constants/firebase/fire-store.types';
@@ -14,6 +14,7 @@ const materialModules = [MatProgressBar];
   selector: 'app-gifts',
   imports: [ContentBlock, AsyncPipe, ...materialModules],
   templateUrl: './gifts.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './gifts.component.scss',
 })
 export class GiftsComponent {
