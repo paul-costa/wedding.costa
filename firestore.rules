@@ -1,24 +1,11 @@
 rules_version = '2';
+
+// Read-only since 23 Oct 2026: the wedding (3 Oct 2025) is over, so nobody may write or delete any more.
 service cloud.firestore {
   match /databases/{database}/documents {
-    // All page content is public; it is edited in the Firebase console.
     match /{document=**} {
       allow read: if true;
-    }
-
-    // Guests answer their invitation (the guest documents are created in the console).
-    match /guests/{guestId} {
-      allow update: if request.resource.data.id == guestId
-        && request.resource.data.isGuestShowingUp is bool;
-    }
-
-    // The guest book: anyone may leave a message, nobody can edit or remove one.
-    match /userMessages/{messageId} {
-      allow create: if request.resource.data.id == messageId
-        && request.resource.data.value is string
-        && request.resource.data.value.size() > 0
-        && request.resource.data.value.size() <= 1000
-        && request.resource.data.date is timestamp;
+      allow write: if false;
     }
   }
 }
