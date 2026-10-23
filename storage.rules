@@ -1,0 +1,11 @@
+rules_version = '2';
+
+// Read-only since 23 Oct 2026: the gallery stays visible, uploads and deletes are closed.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
