@@ -18,7 +18,8 @@
 }
 
 html {
-  @include mat.core();
+  @include mat.elevation-classes();
+  @include mat.app-background();
   @include mat.theme(
     (
       color: (
@@ -224,12 +225,12 @@ mat-tab-group {
 }
 
 .default-snackbar {
-  --mdc-snackbar-container-color: #2e5867;
-  --mdc-snackbar-supporting-text-color: #f5f0e1;
-  --mdc-snackbar-supporting-text-font: 'Roboto Flex', sans-serif;
-  --mdc-snackbar-supporting-text-weight: 300;
-  --mdc-snackbar-supporting-text-size: 20px;
-  --mdc-snackbar-supporting-text-line-height: 20px;
+  --mat-snackbar-container-color: #2e5867;
+  --mat-snackbar-supporting-text-color: #f5f0e1;
+  --mat-snackbar-supporting-text-font: 'Roboto Flex', sans-serif;
+  --mat-snackbar-supporting-text-weight: 300;
+  --mat-snackbar-supporting-text-size: 20px;
+  --mat-snackbar-supporting-text-line-height: 20px;
   letter-spacing: 1.5px;
 }
 
