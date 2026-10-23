@@ -11,7 +11,6 @@
     "experimentalDecorators": true,
     "target": "ES2022",
     "typeRoots": ["node_modules/@types", "./src/typings"],
-    "lib": ["ES2018", "DOM"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
