@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "wedding-costa-wien",
+    "site": "wedding-costa",
     "public": "dist/browser",
     "ignore": [
       "firebase.json",
