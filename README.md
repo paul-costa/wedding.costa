@@ -15,7 +15,7 @@ npm run build        # dist/browser
 ## Deploy
 
 ```bash
-firebase deploy --only hosting,firestore:rules
+firebase deploy --only hosting,firestore:rules,storage
 ```
 
-The predeploy step builds the app. `firestore.rules` keeps every collection readable; guests may only update their own invitation answer and add guest book messages.
+The predeploy step builds the app. Since 23 Oct 2026 the site is read-only: `firestore.rules` and `storage.rules` allow reads only, and `SiteReadOnly` in `src/app/constants/general.constants.ts` hides the invitation dialog, the "Account (Ich)" button and the guest book input. Set it to `false` and reopen the rules to take answers again.

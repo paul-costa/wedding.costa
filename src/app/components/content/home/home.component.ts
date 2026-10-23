@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Homepage, Messages } from 'src/app/constants/firebase/fire-store.types';
-import { LoadingState } from 'src/app/constants/general.constants';
+import { LoadingState, SiteReadOnly } from 'src/app/constants/general.constants';
 import { UserAddressPipe } from 'src/app/pipes/user-address.pipe';
 import { FireStoreService } from 'src/app/services/fire-store.service';
 import { ContentBlock } from '../../shared/content-block/content-block.component';
@@ -23,6 +23,7 @@ export class HomeComponent {
   messages: Messages;
 
   readonly LoadingState = LoadingState;
+  readonly SiteReadOnly = SiteReadOnly;
 
   private readonly fireStoreService = inject(FireStoreService);
 

@@ -11,8 +11,10 @@
     </button>
   }
 
-  <button mat-button class="button account" title="Account (Ich)" (click)="onAccountButtonClick()">
-    <mat-icon class="button-icon"> manage_accounts </mat-icon>
-    <span> Account (Ich) </span>
-  </button>
+  @if (!SiteReadOnly) {
+    <button mat-button class="button account" title="Account (Ich)" (click)="onAccountButtonClick()">
+      <mat-icon class="button-icon"> manage_accounts </mat-icon>
+      <span> Account (Ich) </span>
+    </button>
+  }
 </nav>

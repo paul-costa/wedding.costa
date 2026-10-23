@@ -1,7 +1,9 @@
 @if (currentLoadingState === LoadingState.Loading) {
   <mat-progress-bar class="progress-bar dark-magenta" mode="indeterminate" />
 } @else if (currentLoadingState === LoadingState.Success && homepage) {
-  <app-content-block class="account-info" [headerText]="homepage.accountHeaderText" [bodyTexts]="homepage.accountBodyText" />
+  @if (!SiteReadOnly) {
+    <app-content-block class="account-info" [headerText]="homepage.accountHeaderText" [bodyTexts]="homepage.accountBodyText" />
+  }
 
   <div class="main-container">
     <div class="home-content">

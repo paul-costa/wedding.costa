@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { SiteReadOnly } from 'src/app/constants/general.constants';
 import { ContentComponent } from 'src/app/constants/general.interfaces';
 import { BreakpointObserverService } from 'src/app/services/breakpoint-observer.service';
 import { ContentComponents } from '../../constants/app.constants';
@@ -26,6 +27,7 @@ export class SidenavComponent implements OnDestroy {
   sidenavHidden?: boolean;
 
   readonly contentComponents: ContentComponent[] = Object.values(ContentComponents);
+  readonly SiteReadOnly = SiteReadOnly;
 
   private readonly breakpointObserverService = inject(BreakpointObserverService);
   private readonly destroy$ = new Subject<void>();

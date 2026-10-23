@@ -5,7 +5,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { GuestsDialogComponent } from './components/content/guests-dialog/guests-dialog.component';
 import { ContentComponents } from './constants/app.constants';
-import { Content, DefaultSnackbarConfig, LocalStorageKeys, SessionStorageKeys } from './constants/general.constants';
+import { Content, DefaultSnackbarConfig, LocalStorageKeys, SessionStorageKeys, SiteReadOnly } from './constants/general.constants';
 import { ContentComponent, GuestsDialogCloseConfig } from './constants/general.interfaces';
 import { FireStoreService } from './services/fire-store.service';
 
@@ -38,7 +38,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Ask once per browser session until the guest has answered; "Account (Ich)" opens it again any time.
-    if (!localStorage.getItem(LocalStorageKeys.SubmittedGuestId) && !sessionStorage.getItem(SessionStorageKeys.AccountDialogDismissed)) {
+    if (
+      !SiteReadOnly &&
+      !localStorage.getItem(LocalStorageKeys.SubmittedGuestId) &&
+      !sessionStorage.getItem(SessionStorageKeys.AccountDialogDismissed)
+    ) {
       this.initAccountDialog();
     }
   }

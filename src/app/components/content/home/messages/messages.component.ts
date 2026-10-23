@@ -8,7 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Subject, takeUntil } from 'rxjs';
 import { ContentBlock } from 'src/app/components/shared/content-block/content-block.component';
 import { Messages, UserMessage } from 'src/app/constants/firebase/fire-store.types';
-import { LoadingState, LocalStorageKeys } from 'src/app/constants/general.constants';
+import { LoadingState, LocalStorageKeys, SiteReadOnly } from 'src/app/constants/general.constants';
 import { FireStoreService } from 'src/app/services/fire-store.service';
 import { MessageAdminFirstNames } from './messages.constants';
 
@@ -32,6 +32,7 @@ export class MessagesComponent implements OnDestroy {
   readonly currentUserMessage = new FormControl<string>('', [Validators.required, Validators.maxLength(1000)]);
   readonly LoadingState = LoadingState;
   readonly MessageAdminFirstNames = MessageAdminFirstNames;
+  readonly SiteReadOnly = SiteReadOnly;
 
   private readonly destroy$ = new Subject<void>();
   private readonly fireStoreService = inject(FireStoreService);

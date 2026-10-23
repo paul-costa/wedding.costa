@@ -22,8 +22,9 @@
       }
     </div>
 
-    <div class="input-form-container">
-      <mat-form-field class="input-form">
+    @if (!SiteReadOnly) {
+      <div class="input-form-container">
+        <mat-form-field class="input-form">
         <mat-label>{{ config.messagesInputHeaderLabel }}</mat-label>
         <textarea matInput required cdkTextareaAutosize [formControl]="currentUserMessage" (keydown.control.enter)="onSendUserMessageButtonClick()"></textarea>
         @if (currentUserMessage.invalid) {
@@ -31,9 +32,10 @@
         }
       </mat-form-field>
 
-      <button mat-icon-button class="send-button" title="Senden" [disabled]="isSending" (click)="onSendUserMessageButtonClick()">
-        <mat-icon>send</mat-icon>
-      </button>
-    </div>
+        <button mat-icon-button class="send-button" title="Senden" [disabled]="isSending" (click)="onSendUserMessageButtonClick()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+    }
   </div>
 </app-content-block>
