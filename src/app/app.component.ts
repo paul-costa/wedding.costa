@@ -1,9 +1,11 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { GuestsDialogComponent } from './components/content/guests-dialog/guests-dialog.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ContentComponents } from './constants/app.constants';
 import { Content, DefaultSnackbarConfig, LocalStorageKeys, SessionStorageKeys, SiteReadOnly } from './constants/general.constants';
 import { ContentComponent, GuestsDialogCloseConfig } from './constants/general.interfaces';
@@ -11,9 +13,9 @@ import { FireStoreService } from './services/fire-store.service';
 
 @Component({
   selector: 'app-root',
+  imports: [MatSidenavModule, RouterOutlet, SidenavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {
   currentContentComponent?: ContentComponent;
