@@ -18,4 +18,4 @@ npm run build        # dist/browser
 firebase deploy --only hosting,firestore:rules,storage
 ```
 
-The predeploy step builds the app. Since 23 Oct 2026 the site is read-only: `firestore.rules` and `storage.rules` allow reads only, and `SiteReadOnly` in `src/app/constants/general.constants.ts` hides the invitation dialog, the "Account (Ich)" button and the guest book input. Set it to `false` and reopen the rules to take answers again.
+The predeploy step builds the app. Since 23 Oct 2026 the site is read-only: `firestore.rules` and `storage.rules` allow reads only, and `SiteReadOnly` in `src/app/constants/general.constants.ts` hides the invitation dialog, the "Account (Ich)" button and the guest book input. Since 29 Oct 2026 the rules also close the guest list (`guests`) and the invitation dialog (`accountDialog`) for reading: the read-only site never loads them, and the names and answers of the guests stay private. Set `SiteReadOnly` to `false` and reopen the rules (including those two collections) to take answers again.
