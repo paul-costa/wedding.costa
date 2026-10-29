@@ -1,10 +1,19 @@
 rules_version = '2';
 
 // Read-only since 23 Oct 2026: the wedding (3 Oct 2025) is over, so nobody may write or delete any more.
+//
+// Since 29 Oct 2026 only the collections the site still shows are readable. The guest list
+// (`guests`: names and answers) and the invitation dialog (`accountDialog`) are not among them:
+// the read-only site never opens that dialog, and the guests' names and answers are nobody
+// else's business. Firestore grants a request when any rule allows it, so the public
+// collections are listed one by one instead of a catch-all that would cover the guests too.
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read: if true;
+    match /{collection}/{docId} {
+      allow read: if collection in [
+        'homepage', 'messages', 'userMessages', 'locationJourney', 'schedule',
+        'dresscode', 'dosAndDonts', 'gifts', 'gallery'
+      ];
       allow write: if false;
     }
   }
